@@ -1,6 +1,6 @@
 [![](https://travis-ci.org/hadim/maskflow-fiji.svg?branch=master)](https://travis-ci.org/hadim/maskflow-fiji)
 
-# maskflow-fiji
+# `maskflow-fiji`: Object Detection and Segmentation
 
 A Fiji plugin for object detection and tracking based on [Mask RCNN](https://arxiv.org/abs/1703.06870).
 
