@@ -1,0 +1,23 @@
+## Maven ##
+/target/
+
+## Eclipse ##
+/.classpath
+/.project
+.settings
+
+## vim ##
+*.swp
+
+## Interactive tests ##
+/samples/
+
+## MacOSX
+.DS_Store
+
+nbactions.xml
+nb-configuration.xml
+
+pom.xml.releaseBackup
+models
+.ipynb_checkpoints/
