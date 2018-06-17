@@ -2,14 +2,14 @@
 # @CommandService cs
 # @ModuleService ms
 
-from sc.fiji.maskrcnn import ObjectsDetector
-from sc.fiji.maskrcnn import ObjectsTracker
+from sc.fiji.maskflow import ObjectDetector
+from sc.fiji.maskflow import ObjectTracker
 
 inputs = {"model": None,
           "modelName": "Microtubule",
           "dataset": data,
           "fillROIManager": True}
-module = ms.waitFor(cs.run(ObjectsDetector, True, inputs))
+module = ms.waitFor(cs.run(ObjectDetector, True, inputs))
 
 table = module.getOutput("table")
 masks = module.getOutput("masks")
@@ -20,6 +20,6 @@ inputs = {"masks": masks,
           "gapClosingMaxDistance": 10,
           "maxFrameGap": 5,
           "fillROIManager": True}
-          
-module = ms.waitFor(cs.run(ObjectsTracker, True, inputs))
+
+module = ms.waitFor(cs.run(ObjectTracker, True, inputs))
 table = module.getOutput("resultTable")

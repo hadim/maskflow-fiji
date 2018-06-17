@@ -30,13 +30,13 @@ Here is an example script:
 # @CommandService cs
 # @ModuleService ms
 
-from sc.fiji.maskrcnn import ObjectsDetector
+from sc.fiji.maskflow import ObjectDetector
 
 inputs = {"model": None,
           "modelName": "Microtubule",
           "dataset": data,
           "fillROIManager": True}}
-module = ms.waitFor(cs.run(ObjectsDetector, True, inputs))
+module = ms.waitFor(cs.run(ObjectDetector, True, inputs))
 
 table = module.getOutput("table")
 masks = module.getOutput("masks")
@@ -49,14 +49,14 @@ The plugin also comes with an object tracker based on the centroid of the detect
 # @CommandService cs
 # @ModuleService ms
 
-from sc.fiji.maskrcnn import ObjectsDetector
-from sc.fiji.maskrcnn import ObjectsTracker
+from sc.fiji.maskflow import ObjectDetector
+from sc.fiji.maskflow import ObjectTracker
 
 inputs = {"model": None,
           "modelName": "Microtubule",
           "dataset": data,
           "fillROIManager": True}
-module = ms.waitFor(cs.run(ObjectsDetector, True, inputs))
+module = ms.waitFor(cs.run(ObjectDetector, True, inputs))
 
 table = module.getOutput("table")
 masks = module.getOutput("masks")
@@ -68,7 +68,7 @@ inputs = {"masks": masks,
           "maxFrameGap": 5,
           "fillROIManager": True}
           
-module = ms.waitFor(cs.run(ObjectsTracker, True, inputs))
+module = ms.waitFor(cs.run(ObjectTracker, True, inputs))
 table = module.getOutput("resultTable")
 
 ```
@@ -80,7 +80,7 @@ There is also a command that combine both detection and tracking:
 # @CommandService cs
 # @ModuleService ms
 
-from sc.fiji.maskrcnn import ObjectsDetectAndTrack
+from sc.fiji.maskflow import ObjectDetectAndTrack
 
 inputs = {"model": None,
           "modelName": "Microtubule",
@@ -89,7 +89,7 @@ inputs = {"model": None,
           "gapClosingMaxDistance": 10,
           "maxFrameGap": 5,
           "fillROIManager": True}
-module = ms.waitFor(cs.run(ObjectsDetectAndTrack, True, inputs))
+module = ms.waitFor(cs.run(ObjectDetectAndTrack, True, inputs))
 
 table = module.getOutput("resultsTable")
 masks = module.getOutput("masks")
