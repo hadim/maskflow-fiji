@@ -1,5 +1,3 @@
-[![](https://travis-ci.com/hadim/maskflow-fiji.svg?branch=master)](https://travis-ci.com/hadim/maskflow-fiji)
-
 [![](https://travis-ci.org/hadim/maskflow-fiji.svg?branch=master)](https://travis-ci.org/hadim/maskflow-fiji)
 
 # maskflow-fiji
