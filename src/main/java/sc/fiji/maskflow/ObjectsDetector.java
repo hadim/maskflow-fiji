@@ -48,13 +48,13 @@ import sc.fiji.maskflow.internal.MaskRCNNPostprocessImage;
 import sc.fiji.maskflow.internal.MaskRCNNPreprocessImage;
 import sc.fiji.maskflow.utils.ROIUtils;
 
-@Plugin(type = Command.class, menuPath = "Plugins>Mask RCNN>Detect Objects", headless = true)
+@Plugin(type = Command.class, menuPath = "Plugins>Maskflow>Detect Objects", headless = true)
 public class ObjectsDetector implements Command {
 
 	static private Map<String, String> AVAILABLE_MODELS = new HashMap<>();
 	static {
 		AVAILABLE_MODELS.put("Microtubule",
-			"https://github.com/hadim/Fiji_MaskRCNN/releases/download/Fiji_MaskRCNN-0.4.0/tf_model_microtubule_coco_512.zip");
+			"https://storage.googleapis.com/nn-models/microtubule-v0.1.zip");
 	}
 
 	@Parameter
@@ -86,7 +86,8 @@ public class ObjectsDetector implements Command {
 	@Parameter
 	private Dataset dataset;
 
-	@Parameter(required = false)
+	@Parameter(required = false, label = "Fille ROI Manager",
+		description = "Fill the ROI Manager with detected objects.")
 	private boolean fillROIManager = false;
 
 	@Parameter(type = ItemIO.OUTPUT)
@@ -157,7 +158,7 @@ public class ObjectsDetector implements Command {
 		startTime = System.currentTimeMillis();
 
 		Module preprocessModule;
-		List<String> classLabels = new ArrayList<>();
+		List<String> classNames = new ArrayList<>();
 
 		Map<String, List<Tensor<?>>> preprocessingOutputsMap = new HashMap<>();
 		preprocessingOutputsMap.put("moldedImage", new ArrayList<>());
@@ -179,7 +180,7 @@ public class ObjectsDetector implements Command {
 				entry.getValue().add((Tensor<?>) preprocessModule.getOutput(entry.getKey()));
 			}
 			// Gather non-Tensor outputs.
-			classLabels = (List<String>) preprocessModule.getOutput("classLabels");
+			classNames = (List<String>) preprocessModule.getOutput("classNames");
 		}
 
 		stopTime = System.currentTimeMillis();
@@ -262,7 +263,7 @@ public class ObjectsDetector implements Command {
 		else {
 			this.masks = this.createMasks(postprocessOutputsMap.get("masks"));
 			this.table = this.createTable(postprocessOutputsMap.get("rois"), postprocessOutputsMap.get(
-				"scores"), postprocessOutputsMap.get("class_ids"), classLabels);
+				"scores"), postprocessOutputsMap.get("class_ids"), classNames);
 
 			if (fillROIManager) {
 				ROIUtils.fillROIManager(this.table);
@@ -431,7 +432,7 @@ public class ObjectsDetector implements Command {
 			throw new Exception("Input image must have 2 or 3 dimensions.");
 		}
 
-		int maxSize = (int) this.parameters.get("image_max_dimension");
+		int maxSize = (int) this.parameters.get("IMAGE_MAX_DIM");
 		if (this.dataset.dimension(0) > maxSize) {
 			throw new Exception("Width cannot be greater than " + maxSize + " pixels.");
 		}
@@ -442,7 +443,7 @@ public class ObjectsDetector implements Command {
 
 	private void loadParameters() {
 		try {
-			File parametersFile = cds.loadFile(this.modelLocation, this.modelnameCache, "parameters.yml");
+			File parametersFile = cds.loadFile(this.modelLocation, this.modelnameCache, "config.yml");
 
 			InputStream input = new FileInputStream(parametersFile);
 			Yaml yaml = new Yaml();

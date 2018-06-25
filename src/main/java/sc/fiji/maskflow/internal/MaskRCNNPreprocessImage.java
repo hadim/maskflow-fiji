@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import net.imagej.Dataset;
 import net.imagej.DatasetService;
@@ -28,11 +29,12 @@ import org.yaml.snakeyaml.Yaml;
 
 import sc.fiji.maskflow.CustomDownloadService;
 import sc.fiji.maskflow.utils.ArrayUtils;
+import sc.fiji.maskflow.utils.TensorUtils;
 
 @Plugin(type = Command.class, headless = true)
 public class MaskRCNNPreprocessImage extends AbstractPredictor implements Command {
 
-	private static final String MODEL_FILENAME = "preprocessing_graph.pb";
+	private static final String MODEL_FILENAME = "preprocessing.pb";
 
 	private static final List<String> OUTPUT_NODE_NAMES = Arrays.asList("molded_image",
 		"image_metadata", "window", "anchors");
@@ -68,7 +70,7 @@ public class MaskRCNNPreprocessImage extends AbstractPredictor implements Comman
 	private Tensor<?> imageShape;
 
 	@Parameter(type = ItemIO.OUTPUT)
-	private List<String> classLabels;
+	private List<String> classNames;
 
 	@Parameter
 	private OpService op;
@@ -131,54 +133,62 @@ public class MaskRCNNPreprocessImage extends AbstractPredictor implements Comman
 
 		// Load parameters from YAML file
 		try {
-			File parametersFile = cds.loadFile(modelLocation, modelName, "parameters.yml");
+			File parametersFile = cds.loadFile(modelLocation, modelName, "config.yml");
 
 			InputStream input = new FileInputStream(parametersFile);
 			Yaml yaml = new Yaml();
 			Map data = (Map) yaml.load(input);
 
-			this.classLabels = (List<String>) data.get("class_names");
+			this.classNames = (List<String>) data.get("CLASS_NAMES");
 
 			// Compute input values
 			Map<String, Tensor<?>> inputNodes = new HashMap<>();
 
-			this.inputTensorImage = Tensors.tensorFloat((RandomAccessibleInterval<FloatType>) op.run(
-				"convert.float32", inputDataset.getImgPlus()));
+			RandomAccessibleInterval<FloatType> im = (RandomAccessibleInterval<FloatType>) op.run(
+				"convert.float32", inputDataset.getImgPlus());
+			this.inputTensorImage = Tensors.tensorFloat(im);
+			
+			if (this.inputTensorImage.numDimensions() == 2) {
+				this.inputTensorImage = (Tensor<Float>) TensorUtils.expandDimension(this.inputTensorImage,
+					-1);
+			}
+			
 			inputNodes.put("input_image", this.inputTensorImage);
-
+			
 			inputNodes.put("original_image_height", org.tensorflow.Tensors.create(
 				((Long) this.inputTensorImage.shape()[0]).intValue()));
 			inputNodes.put("original_image_width", org.tensorflow.Tensors.create(
 				((Long) this.inputTensorImage.shape()[1]).intValue()));
 
-			int[] class_ids = ArrayUtils.listDoubleToIntArray((List) data.get("class_ids"));
-			inputNodes.put("class_ids", org.tensorflow.Tensors.create(class_ids));
+			int[] classIDS = IntStream.range(0, this.classNames.size() + 1).mapToLong(x -> 0).mapToInt(
+				x -> 0).toArray();
+			inputNodes.put("class_ids", org.tensorflow.Tensors.create(classIDS));
 
 			inputNodes.put("image_min_dimension", org.tensorflow.Tensors.create((int) data.get(
-				"image_min_dimension")));
+				"IMAGE_MIN_DIM")));
 			inputNodes.put("image_max_dimension", org.tensorflow.Tensors.create((int) data.get(
-				"image_max_dimension")));
+				"IMAGE_MAX_DIM")));
 
 			inputNodes.put("minimum_scale", org.tensorflow.Tensors.create(((Double) data.get(
-				"minimum_scale")).floatValue()));
+				"IMAGE_MIN_SCALE")).floatValue()));
 
-			float[] mean_pixels = ArrayUtils.listDoubleToFloatArray((List) data.get("mean_pixels"));
+			float[] mean_pixels = ArrayUtils.listDoubleToFloatArray((List) data.get("MEAN_PIXEL"));
 			inputNodes.put("mean_pixels", org.tensorflow.Tensors.create(mean_pixels));
 
 			int[] backbone_strides = ArrayUtils.listIntegerToIntArray((List) data.get(
-				"backbone_strides"));
+				"BACKBONE_STRIDES"));
 			inputNodes.put("backbone_strides", org.tensorflow.Tensors.create(backbone_strides));
 
 			int[] rpn_anchor_scales = ArrayUtils.listIntegerToIntArray((List) data.get(
-				"rpn_anchor_scales"));
+				"RPN_ANCHOR_SCALES"));
 			inputNodes.put("rpn_anchor_scales", org.tensorflow.Tensors.create(rpn_anchor_scales));
 
 			float[] rpn_anchor_ratios = ArrayUtils.listDoubleToFloatArray((List) data.get(
-				"rpn_anchor_ratios"));
+				"RPN_ANCHOR_RATIOS"));
 			inputNodes.put("rpn_anchor_ratios", org.tensorflow.Tensors.create(rpn_anchor_ratios));
 
 			inputNodes.put("rpn_anchor_stride", org.tensorflow.Tensors.create((int) data.get(
-				"rpn_anchor_stride")));
+				"RPN_ANCHOR_STRIDE")));
 
 			return inputNodes;
 

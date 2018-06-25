@@ -4,7 +4,7 @@
 
 A Fiji plugin for object detection and tracking based on [Mask RCNN](https://arxiv.org/abs/1703.06870).
 
-It allows object detection, segmentation and tracking using a pre-trained model with the associated `maskflow` Python package.
+It allows object detection, segmentation and tracking using a pre-trained model with the associated [`maskflow` Python package](https://github.com/hadim/maskflow).
 
 ## Usage
 
@@ -98,8 +98,9 @@ masks = module.getOutput("masks")
 
 ## Available Models
 
-| Objects | Version | Description | Size | URL |
+| Objects | Version | Description | Image Size | URL |
 | --- | --- | --- | --- | --- |
+| Microtubule | 0.1 | WIP | 1280x1280 | https://storage.googleapis.com/nn-models/microtubule-v0.1.zip |
 
 TODO
 

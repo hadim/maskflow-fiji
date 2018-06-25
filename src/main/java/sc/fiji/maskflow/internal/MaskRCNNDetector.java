@@ -20,7 +20,7 @@ import org.tensorflow.Tensor;
 @Plugin(type = Command.class, headless = true)
 public class MaskRCNNDetector extends AbstractPredictor implements Command {
 
-	private static final String MODEL_FILENAME = "model.pb";
+	private static final String MODEL_FILENAME = "maskrcnn.pb";
 
 	// Specific parameters.
 	private static final Map<String, Object> DEFAULT_INPUT_NODES = new HashMap<String, Object>() {
@@ -72,7 +72,7 @@ public class MaskRCNNDetector extends AbstractPredictor implements Command {
 	@Override
 	public void run() {
 
-		this.loadModel(modelLocation, modelName, "model.pb");
+		this.loadModel(modelLocation, modelName, MODEL_FILENAME);
 
 		// Get input nodes as tensor.
 		Map<String, Object> inputNodes = new HashMap<>(DEFAULT_INPUT_NODES);

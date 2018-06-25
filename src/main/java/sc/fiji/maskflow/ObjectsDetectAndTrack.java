@@ -18,7 +18,7 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
-@Plugin(type = Command.class, menuPath = "Plugins>Mask RCNN>Detect and Track Objects",
+@Plugin(type = Command.class, menuPath = "Plugins>Maskflow>Detect and Track Objects",
 	headless = true)
 public class ObjectsDetectAndTrack implements Command {
 

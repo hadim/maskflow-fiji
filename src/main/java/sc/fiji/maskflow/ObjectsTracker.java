@@ -148,8 +148,6 @@ public class ObjectsTracker implements Command {
 			}
 		}
 
-		log.info(trackedSpots);
-
 		// Now we iterate over each tracker spots and add a column to table to set
 		// its object id.
 

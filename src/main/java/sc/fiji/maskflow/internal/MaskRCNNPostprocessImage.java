@@ -17,7 +17,7 @@ import org.tensorflow.Tensor;
 @Plugin(type = Command.class, headless = true)
 public class MaskRCNNPostprocessImage extends AbstractPredictor implements Command {
 
-	private static final String MODEL_FILENAME = "postprocessing_graph.pb";
+	private static final String MODEL_FILENAME = "postprocessing.pb";
 
 	// Specific parameters.
 	private static final Map<String, Object> DEFAULT_INPUT_NODES = new HashMap<String, Object>() {

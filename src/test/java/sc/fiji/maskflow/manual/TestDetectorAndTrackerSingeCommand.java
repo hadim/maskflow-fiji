@@ -6,15 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import net.imagej.Dataset;
 import net.imagej.ImageJ;
-import net.imagej.table.GenericTable;
 
 import org.scijava.command.CommandModule;
 
-import sc.fiji.maskflow.ObjectsDetector;
+import sc.fiji.maskflow.ObjectsDetectAndTrack;
 
-public class TestDetector {
+public class TestDetectorAndTrackerSingeCommand {
 
 	public static void main(String[] args) throws IOException {
 
@@ -39,19 +37,18 @@ public class TestDetector {
 		final Object dataset = ij.io().open(imagePath);
 		ij.ui().show(dataset);
 
-		// Set parameters
-		Map<String, Object> inputs = new HashMap<>();
-		inputs.put("model", model);
-		inputs.put("modelName", null);
-		inputs.put("dataset", dataset);
-		inputs.put("fillROIManager", true);
-
 		try {
 
-			// Run command and get results
-			CommandModule module = ij.command().run(ObjectsDetector.class, true, inputs).get();
-			Dataset mask = (Dataset) module.getOutput("masks");
-			GenericTable table = (GenericTable) module.getOutput("table");
+			// Detect objects
+			Map<String, Object> inputs = new HashMap<>();
+			inputs.put("model", null);
+			inputs.put("modelName", "Microtubule");
+			inputs.put("dataset", dataset);
+			inputs.put("linkingMaxDistance", 10.0);
+			inputs.put("gapClosingMaxDistance", 10.0);
+			inputs.put("maxFrameGap", 5);
+			inputs.put("fillROIManager", true);
+			CommandModule module = ij.command().run(ObjectsDetectAndTrack.class, true, inputs).get();
 		}
 		catch (InterruptedException | ExecutionException exc) {
 			exc.printStackTrace();

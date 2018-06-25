@@ -22,8 +22,8 @@ public class TestDetectorAndTracker {
 		final ImageJ ij = new ImageJ();
 		ij.ui().showUI();
 
-		String modelPath = "/home/hadim/Drive/Data/Neural_Network/Mask-RCNN/Microtubules/saved_model/";
-		String model = modelPath + "tf_model_microtubule_coco_512.zip";
+		String modelPath = "/home/hadim/Drive/Data/Neural_Network/Maskflow/Microtubule/SavedModel/";
+		String model = modelPath + "microtubule-v0.1.zip";
 
 		// Open an image and display it.
 		String basePath = "/home/hadim/Documents/Code/Postdoc/ij/testdata/";
