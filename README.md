@@ -102,8 +102,6 @@ masks = module.getOutput("masks")
 | --- | --- | --- | --- | --- |
 | Microtubule | 0.1 | WIP | 1280x1280 | https://storage.googleapis.com/nn-models/microtubule-v0.1.zip |
 
-TODO
-
 ## GPU Support
 
 This type of neural networks are much more faster on GPU than CPU.  To enable GPU support ([only Linux at the moment](https://github.com/tensorflow/tensorflow/issues/16660)), you need to manually remove `libtensorflow_jni-1.8.0.jar` from the `jars` folder in your Fiji folder and copy [`libtensorflow_jni_gpu-1.8.0.jar`](http://central.maven.org/maven2/org/tensorflow/libtensorflow_jni_gpu/1.8.0/libtensorflow_jni_gpu-1.8.0.jar) instead.
