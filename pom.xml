@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>maskflow-fiji</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 
 	<name>maskflow-fiji</name>
 	<description>A Fiji plugin for object detection and tracking based on MaskRCNN.</description>
