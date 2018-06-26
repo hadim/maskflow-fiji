@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>maskflow-fiji</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.1.0</version>
 
 	<name>maskflow-fiji</name>
 	<description>A Fiji plugin for object detection and tracking based on MaskRCNN.</description>
@@ -79,7 +79,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/hadim/maskflow-fiji</connection>
 		<developerConnection>scm:git:git@github.com:hadim/maskflow-fiji</developerConnection>
-		<tag>HEAD</tag>
+		<tag>maskflow-fiji-0.1.0</tag>
 		<url>https://github.com/hadim/maskflow-fiji</url>
 	</scm>
 	<issueManagement>
