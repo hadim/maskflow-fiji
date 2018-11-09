@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>22.1.0</version>
+		<version>23.1.1</version>
 		<relativePath />
 	</parent>
 
 	<artifactId>maskflow-fiji</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 
 	<name>maskflow-fiji</name>
 	<description>A Fiji plugin for object detection and tracking based on MaskRCNN.</description>
