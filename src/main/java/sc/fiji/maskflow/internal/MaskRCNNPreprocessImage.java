@@ -11,13 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import net.imagej.Dataset;
-import net.imagej.DatasetService;
-import net.imagej.ops.OpService;
-import net.imagej.tensorflow.Tensors;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.type.numeric.real.FloatType;
-
 import org.scijava.ItemIO;
 import org.scijava.command.Command;
 import org.scijava.io.location.Location;
@@ -27,6 +20,12 @@ import org.tensorflow.Session.Runner;
 import org.tensorflow.Tensor;
 import org.yaml.snakeyaml.Yaml;
 
+import net.imagej.Dataset;
+import net.imagej.DatasetService;
+import net.imagej.ops.OpService;
+import net.imagej.tensorflow.Tensors;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.type.numeric.real.FloatType;
 import sc.fiji.maskflow.CustomDownloadService;
 import sc.fiji.maskflow.utils.ArrayUtils;
 import sc.fiji.maskflow.utils.TensorUtils;

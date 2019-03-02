@@ -10,8 +10,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import net.imagej.ImageJService;
-
 import org.scijava.app.AppService;
 import org.scijava.app.StatusService;
 import org.scijava.download.DiskLocationCache;
@@ -26,6 +24,8 @@ import org.scijava.service.Service;
 import org.scijava.task.Task;
 import org.scijava.task.event.TaskEvent;
 import org.scijava.util.ByteArray;
+
+import net.imagej.ImageJService;
 
 /*
  * Ideally that class should live elsewhere. It comes from 

@@ -1,12 +1,12 @@
 
 package sc.fiji.maskflow.utils;
 
-import net.imagej.tensorflow.GraphBuilder;
-
 import org.tensorflow.Graph;
 import org.tensorflow.Output;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
+
+import net.imagej.tensorflow.GraphBuilder;
 
 public class TensorUtils {
 

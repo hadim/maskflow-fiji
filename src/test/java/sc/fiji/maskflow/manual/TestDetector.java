@@ -6,12 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.scijava.command.CommandModule;
+import org.scijava.table.GenericTable;
+
 import net.imagej.Dataset;
 import net.imagej.ImageJ;
-import net.imagej.table.GenericTable;
-
-import org.scijava.command.CommandModule;
-
 import sc.fiji.maskflow.ObjectsDetector;
 
 public class TestDetector {

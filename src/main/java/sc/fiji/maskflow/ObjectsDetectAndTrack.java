@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import net.imagej.Dataset;
-import net.imagej.ops.OpService;
-import net.imagej.table.GenericTable;
-
 import org.scijava.ItemIO;
 import org.scijava.ItemVisibility;
 import org.scijava.command.Command;
@@ -17,6 +13,10 @@ import org.scijava.command.CommandService;
 import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.scijava.table.GenericTable;
+
+import net.imagej.Dataset;
+import net.imagej.ops.OpService;
 
 @Plugin(type = Command.class, menuPath = "Plugins>Maskflow>Detect and Track Objects",
 	headless = true)

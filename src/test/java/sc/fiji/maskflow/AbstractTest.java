@@ -1,8 +1,6 @@
 
 package sc.fiji.maskflow;
 
-import net.imagej.ImageJ;
-
 import org.junit.After;
 import org.junit.Before;
 import org.scijava.Context;
@@ -10,6 +8,8 @@ import org.scijava.command.CommandService;
 import org.scijava.io.IOService;
 import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
+
+import net.imagej.ImageJ;
 
 public class AbstractTest {
 

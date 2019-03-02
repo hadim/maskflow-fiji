@@ -6,10 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import net.imagej.ImageJ;
-
 import org.scijava.command.CommandModule;
 
+import net.imagej.ImageJ;
 import sc.fiji.maskflow.ObjectsDetectAndTrack;
 
 public class TestDetectorAndTrackerSingeCommand {

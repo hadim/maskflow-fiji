@@ -4,13 +4,13 @@ package sc.fiji.maskflow.internal;
 import java.io.IOException;
 import java.util.List;
 
-import net.imagej.tensorflow.TensorFlowService;
-
 import org.scijava.io.location.Location;
 import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
 import org.tensorflow.Graph;
 import org.tensorflow.Session;
+
+import net.imagej.tensorflow.TensorFlowService;
 
 public abstract class AbstractPredictor {
 

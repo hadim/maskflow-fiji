@@ -12,10 +12,9 @@ import org.scijava.io.location.Location;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import org.tensorflow.Session.Runner;
+import org.tensorflow.Tensor;
 
 import sc.fiji.maskflow.utils.TensorUtils;
-
-import org.tensorflow.Tensor;
 
 @Plugin(type = Command.class, headless = true)
 public class MaskRCNNDetector extends AbstractPredictor implements Command {

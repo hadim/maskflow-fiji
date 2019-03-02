@@ -1,15 +1,6 @@
 
 package sc.fiji.maskflow;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
-import net.imagej.Dataset;
-
-import org.junit.Test;
-
 public class TestCommands extends AbstractTest {
 
 /*	@Test

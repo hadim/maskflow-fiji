@@ -5,13 +5,13 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.imagej.table.GenericColumn;
-import net.imagej.table.GenericTable;
-import net.imglib2.display.ColorTable;
+import org.scijava.table.GenericColumn;
+import org.scijava.table.GenericTable;
 
 import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.plugin.frame.RoiManager;
+import net.imglib2.display.ColorTable;
 
 public class ROIUtils {
 
