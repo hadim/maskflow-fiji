@@ -1,10 +1,11 @@
-[![](https://travis-ci.org/hadim/maskflow-fiji.svg?branch=master)](https://travis-ci.org/hadim/maskflow-fiji)
-
 # `maskflow-fiji`: Object Detection and Segmentation
+[![](https://travis-ci.org/hadim/maskflow-fiji.svg?branch=master)](https://travis-ci.org/hadim/maskflow-fiji)
 
 A Fiji plugin for object detection and tracking based on [Mask RCNN](https://arxiv.org/abs/1703.06870).
 
 It allows object detection, segmentation and tracking using a pre-trained model with the associated [`maskflow` Python package](https://github.com/hadim/maskflow).
+
+**IMPORTANT: This plugin is a proof of concept and in a very early stage. At the moment only a simple model to detect microtubules is provided. I hope to be able to continue the development at some point.**
 
 ## Usage
 
